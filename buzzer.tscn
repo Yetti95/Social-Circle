@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://clcs4i4tpo4yq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xli68"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlatf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhof4"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ly40c"]
+material = SubResource("StandardMaterial3D_fhof4")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.2
+
+[node name="Buzzer" type="Node3D"]
+
+[node name="BuzzerBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CylinderMesh_xli68")
+
+[node name="Button" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+material_override = SubResource("StandardMaterial3D_qlatf")
+mesh = SubResource("CylinderMesh_ly40c")
+skeleton = NodePath("../BuzzerBase")
