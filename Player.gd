@@ -8,13 +8,17 @@ var pitch_input := 0.0
 var paused := false
 var pause_menu
 
-
+#Captures mouse, hides pause menu
+func resume_game():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pause_menu.hide()
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pause_menu = load("res://pause_menu.tscn").instantiate()
 	get_tree().get_root().add_child.call_deferred(pause_menu)
-	pause_menu.hide()
+	pause_menu.get_node("MarginContainer/VBoxContainer/Resume").on_resume_pressed.connect(resume_game)
+	resume_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,8 +35,6 @@ func _process(delta):
 		paused = ! paused
 		pause_pressed()
 		
-		
-		
 	# Capture camera rotation based on mouse movement
 	$Twist.rotate_y(twist_input)
 	$Twist/Pitch.rotate_x(pitch_input)
@@ -44,6 +46,7 @@ func _process(delta):
 	twist_input = 0.0
 	pitch_input = 0.0
 
+# Inputs captured here
 func _unhandled_input(event: InputEvent) -> void:
 	# Captures mouse movement to affect camera
 	if event is InputEventMouseMotion:
@@ -51,10 +54,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			twist_input = - event.relative.x * mouse_sensitivity
 			pitch_input = - event.relative.y * mouse_sensitivity
 			
+	if event is InputEventMouseButton:
+		pass
+#Display pause menu or resume game
 func pause_pressed():
 	if paused:
 		pause_menu.show()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
-		pause_menu.hide()
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		resume_game()
