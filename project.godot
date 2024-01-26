@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Social-circle"
-run/main_scene="res://menu.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 

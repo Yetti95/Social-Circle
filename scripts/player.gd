@@ -34,11 +34,11 @@ func _process(delta):
 		
 		
 	# Capture camera rotation based on mouse movement
-	$Twist.rotate_y(twist_input)
-	$Twist/Pitch.rotate_x(pitch_input)
+	$"Camera Mount".rotate_y(twist_input)
+	$"Camera Mount/Camera Rot".rotate_x(pitch_input)
 	
 	# move camera based on movement, restrict camera movement from going vertical
-	$Twist/Pitch.rotation.x = clamp($Twist/Pitch.rotation.x,deg_to_rad(-30),deg_to_rad(30))
+	$"Camera Mount/Camera Rot".rotation.x = clamp($"Camera Mount/Camera Rot".rotation.x,deg_to_rad(-30),deg_to_rad(30))
 	
 	# Reset mouse movement effect on camera, (stops camera when not moving mouse)
 	twist_input = 0.0
