@@ -4,9 +4,17 @@ var mouse_sensitivity := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 
+#@onready var pause_menu = $PauseMenu
+var paused := false
+var pause_menu
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pause_menu = load("res://pause_menu.tscn").instantiate()
+	get_tree().get_root().add_child.call_deferred(pause_menu)
+	pause_menu.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -18,9 +26,12 @@ func _process(delta):
 	#  Move player based on the direction they are looking
 	apply_central_force($Twist.basis * input * 1200.0 * delta)
 	
-	# Escape key allows for closing the window
+	# Escape key switches to paused state
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		paused = ! paused
+		pause_pressed()
+		
+		
 		
 	# Capture camera rotation based on mouse movement
 	$Twist.rotate_y(twist_input)
@@ -39,3 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = - event.relative.x * mouse_sensitivity
 			pitch_input = - event.relative.y * mouse_sensitivity
+			
+func pause_pressed():
+	if paused:
+		pause_menu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		pause_menu.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
