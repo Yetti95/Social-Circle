@@ -1,8 +1,5 @@
 extends Control
 
-func _on_play_pressed():
-	pass # Replace with function body.
-
 
 func _on_host_pressed():
 	pass # Replace with function body.
