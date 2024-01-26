@@ -31,11 +31,26 @@ func peer_disconnected(id):
 # This gets called on ONLY the client
 func connected_to_server():
 	print('Connected')
+	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id())
 	
 # This gets called on ONLY the client
 func connection_failed(id):
 	print('Could\'t connect')
 	
+	
+# rpc func for informtion on player
+@rpc("any_peer")
+func SendPlayerInformation(name, id):
+	if !GameManager.Players.has(id):
+		GameManager.Players[id] = {
+			'name': name,
+			'id': id,
+			'playerType': 'normie'
+		}
+	if multiplayer.is_server():
+		for i in GameManager.Players:
+			SendPlayerInformation.rpc(GameManager.Players[i].name, i)
+			
 
 @rpc("any_peer", "call_local")
 func StartGame():
@@ -57,8 +72,9 @@ func _on_host_pressed():
 	#actually setting multiplayer
 	multiplayer.set_multiplayer_peer(peer)
 	print('Waiting for Players!')
+	SendPlayerInformation($Username.text, multiplayer.get_unique_id())
 	$MarginContainer/VBoxContainer/Host.visible = false
-	$MarginContainer/VBoxContainer/join.visible = false
+	$MarginContainer/VBoxContainer/Join.visible = false
 	
 	
 	pass
