@@ -58,6 +58,7 @@ func _on_host_pressed():
 	multiplayer.set_multiplayer_peer(peer)
 	print('Waiting for Players!')
 	$MarginContainer/VBoxContainer/Host.visible = false
+	$MarginContainer/VBoxContainer/join.visible = false
 	
 	
 	pass
@@ -67,6 +68,8 @@ func _on_join_pressed():
 	peer.create_client(Address, PORT.tcp)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
+	$MarginContainer/VBoxContainer/Host.visible = false	
+	$MarginContainer/VBoxContainer/Join.visible = false	
 	pass # Replace with function body.
 
 
