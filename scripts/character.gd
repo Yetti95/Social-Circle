@@ -3,10 +3,25 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+@export var CAMERA_MOUNT : Node3D
+@export var CAMERA_ROT : Node3D
+@export var CAMERA3D : Camera3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready():
+	# Disables camera on non-host server setups, or dedicated server builds
+	if OS.has_feature("dedicated_server"):
+		CAMERA3D.current = false
+		
+	if get_multiplayer_authority() == multiplayer.get_unique_id():
+		CAMERA3D.make_current()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+	else: 
+		set_process(false)
+		set_process_input(false)
 
 func _physics_process(delta):
 	# Add the gravity.
