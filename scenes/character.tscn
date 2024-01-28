@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bh7a2wvnpsyvb"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_16jy0"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_4r616"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jr8v7"]
 
@@ -19,7 +19,7 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-script = ExtResource("1_16jy0")
+script = ExtResource("1_4r616")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_jr8v7")

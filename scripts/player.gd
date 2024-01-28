@@ -12,7 +12,7 @@ var pause_menu
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pause_menu = load("res://pause_menu.tscn").instantiate()
+	pause_menu = load("res://scenes/pause_menu.tscn").instantiate()
 	get_tree().get_root().add_child.call_deferred(pause_menu)
 	pause_menu.hide()
 

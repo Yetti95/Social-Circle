@@ -1,7 +1,7 @@
 extends Control
 
-@export var Address = '127.0.0.1'
-@export var PORT = {'tcp': 3074, 'udp': [88, 3074]}
+@export var Address: = '127.0.0.1'
+@export var PORT := {'tcp': 3074, 'udp': [88, 3074]}
 var peer =  ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -54,7 +54,7 @@ func SendPlayerInformation(name, id):
 
 @rpc("any_peer", "call_local")
 func StartGame():
-	var scene = load('res://Level.tscn').instantiate()
+	var scene = load('res://scenes/Level.tscn').instantiate()
 	get_tree().get_root().add_child(scene)
 	self.hide()
 
