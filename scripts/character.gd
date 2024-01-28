@@ -7,6 +7,13 @@ const JUMP_VELOCITY = 4.5
 @export var CAMERA_ROT : Node3D
 @export var CAMERA3D : Camera3D
 
+
+const CAMERA_MOUSE_ROTATION_SPEED := 0.001
+const CAMERA_X_ROT_MIN := deg_to_rad(-89.9)
+const CAMERA_X_ROT_MAX := deg_to_rad(70)
+const CAMERA_UP_DOWN_MOVEMENT = 1
+
+var paused = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -22,25 +29,15 @@ func _ready():
 	else: 
 		set_process(false)
 		set_process_input(false)
+		
+func _input(event):
+	if not paused && event is InputEventMouseMotion:
+		rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
 
-func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+func rotate_camera(move):
+	CAMERA_MOUNT.rotate_y(-move.x)
+	CAMERA_MOUNT.orthonormalize()
+	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+func get_camera_rotation_basis() -> Basis:
+	return CAMERA_ROT.global_transform.basis

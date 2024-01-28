@@ -14,9 +14,6 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("Camera Mount/Camera Rot/SpringArm3D/Camera3D:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Camera Mount/Camera Rot/SpringArm3D/Camera3D:rotation")
-properties/2/spawn = true
-properties/2/replication_mode = 1
 
 [node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_MOUNT", "CAMERA_ROT", "CAMERA3D")]
 script = ExtResource("1_4r616")
@@ -35,9 +32,10 @@ shape = SubResource("ConvexPolygonShape3D_s1x01")
 [node name="Camera Rot" type="Node3D" parent="Camera Mount"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Camera Mount/Camera Rot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00142574, 0.550004, -0.703278)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Mount/Camera Rot/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00211191, 0.394744, 0.10202)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5evud")
