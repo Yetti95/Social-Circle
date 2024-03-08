@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://djo5awtrr0bke"]
+[gd_scene load_steps=6 format=3 uid="uid://djo5awtrr0bke"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_sub1y"]
+[ext_resource type="Texture2D" uid="uid://dfxw5068ptr8c" path="res://textures/denim_fabric_diff_4k.jpg" id="2_oywa8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lh2a"]
+albedo_texture = ExtResource("2_oywa8")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b503q"]
 
@@ -13,6 +17,7 @@ linear_damp = 3.0
 script = ExtResource("1_sub1y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_5lh2a")
 mesh = SubResource("CapsuleMesh_b503q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
