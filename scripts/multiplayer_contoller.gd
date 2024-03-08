@@ -40,10 +40,10 @@ func connection_failed(id):
 	
 # rpc func for informtion on player
 @rpc("any_peer")
-func SendPlayerInformation(name, id):
+func SendPlayerInformation(customName, id):
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] = {
-			'name': name,
+			'name': customName,
 			'id': id,
 			'playerType': 'normie'
 		}
