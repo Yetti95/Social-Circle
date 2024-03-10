@@ -2,49 +2,48 @@
 
 [ext_resource type="Script" path="res://scripts/multiplayer_contoller.gd" id="1_o5moy"]
 
-[node name="Menu" type="Control"]
-layout_mode = 3
-anchor_right = 1.002
-anchor_bottom = 1.001
-offset_left = 3.0
-offset_top = 1.0
-offset_right = -0.84021
-offset_bottom = -0.0800781
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Multiplayer" type="Node"]
 script = ExtResource("1_o5moy")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Level" type="Node" parent="."]
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 501.0
 offset_right = 1911.0
 offset_bottom = 855.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="Host" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Host" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host"
 
-[node name="Join" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Join" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[node name="Username" type="LineEdit" parent="."]
+[node name="Username" type="LineEdit" parent="Menu"]
 layout_mode = 0
 offset_left = 551.0
 offset_top = 445.0
@@ -53,7 +52,7 @@ offset_bottom = 476.0
 placeholder_text = "Enter a Custom Username"
 alignment = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Menu"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 24.0
@@ -63,8 +62,13 @@ text = "SOCIAL CIRCLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/Level.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

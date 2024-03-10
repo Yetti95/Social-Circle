@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 @export var Address: = '127.0.0.1'
 @export var PORT := {'tcp': 3074, 'udp': [88, 3074]}
@@ -6,13 +6,7 @@ var peer =  ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
-	multiplayer.connected_to_server.connect(connected_to_server)
-	multiplayer.connection_failed.connect(connection_failed)	
-
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,7 +25,7 @@ func peer_disconnected(id):
 # This gets called on ONLY the client
 func connected_to_server():
 	print('Connected')
-	SendPlayerInformation.rpc_id(1, $Username.text, multiplayer.get_unique_id())
+	SendPlayerInformation.rpc_id(1, $Menu/Username.text, multiplayer.get_unique_id())
 	
 # This gets called on ONLY the client
 func connection_failed(id):
@@ -45,7 +39,7 @@ func SendPlayerInformation(customName, id):
 		GameManager.Players[id] = {
 			'name': customName,
 			'id': id,
-			'playerType': 'normie'
+			'playerType': 'normie',
 		}
 	if multiplayer.is_server():
 		for i in GameManager.Players:
@@ -54,9 +48,10 @@ func SendPlayerInformation(customName, id):
 
 @rpc("any_peer", "call_local")
 func StartGame():
-	var scene = load('res://scenes/Level.tscn').instantiate()
-	get_tree().get_root().add_child(scene)
-	self.hide()
+	change_level(load('res://scenes/Level.tscn'))
+	
+
+	$Menu.hide()
 
 func _on_play_pressed():
 	StartGame.rpc()
@@ -72,11 +67,12 @@ func _on_host_pressed():
 	#actually setting multiplayer
 	multiplayer.set_multiplayer_peer(peer)
 	print('Waiting for Players!')
-	SendPlayerInformation($Username.text, multiplayer.get_unique_id())
-	$MarginContainer/VBoxContainer/Host.visible = false
-	$MarginContainer/VBoxContainer/Join.visible = false
-	
-	
+	#SendPlayerInformation($Username.text, multiplayer.get_unique_id())
+	$Menu/MarginContainer/VBoxContainer/Host.visible = false
+	$Menu/MarginContainer/VBoxContainer/Join.visible = false
+
+	change_level.call_deferred(load('res://scenes/Level.tscn'))
+
 	pass
 
 
@@ -84,8 +80,8 @@ func _on_join_pressed():
 	peer.create_client(Address, PORT.tcp)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	$MarginContainer/VBoxContainer/Host.visible = false	
-	$MarginContainer/VBoxContainer/Join.visible = false	
+	$Menu.visible = false	
+	
 	pass # Replace with function body.
 
 
@@ -95,3 +91,12 @@ func _on_options_pressed():
 
 func _on_quit_pressed():
 	pass # Replace with function body.
+
+func change_level(scene: PackedScene):
+	# Remove old level if any.
+	var level = $Level
+	for c in level.get_children():
+		level.remove_child(c)
+		c.queue_free()
+	# Add new level.
+	level.add_child(scene.instantiate())

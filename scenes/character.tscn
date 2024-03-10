@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh7a2wvnpsyvb"]
+[gd_scene load_steps=7 format=3 uid="uid://bh7a2wvnpsyvb"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_4r616"]
+[ext_resource type="Script" path="res://scripts/player_input.gd" id="2_24xgn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jr8v7"]
 
@@ -11,9 +12,17 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("Camera Mount/Camera Rot/SpringArm3D/Camera3D:position")
+properties/1/path = NodePath(".:player")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wgiig"]
+properties/0/path = NodePath("PlayerInput:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
 
 [node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_MOUNT", "CAMERA_ROT", "CAMERA3D")]
 script = ExtResource("1_4r616")
@@ -37,5 +46,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00142574, 0.550004, -0.703
 [node name="Camera3D" type="Camera3D" parent="Camera Mount/Camera Rot/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00211191, 0.394744, 0.10202)
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5evud")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wgiig")
+script = ExtResource("2_24xgn")

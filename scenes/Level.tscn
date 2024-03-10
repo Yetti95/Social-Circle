@@ -205,7 +205,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.12633, 1.95762, -0.0725052
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="PlayerSpawners"]
 _spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
-spawn_path = NodePath("../..")
+spawn_path = NodePath("../0")
+spawn_limit = 1
+
+[node name="MultiplayerSpawner1" type="MultiplayerSpawner" parent="PlayerSpawners"]
+_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
+spawn_path = NodePath("../1")
+spawn_limit = 1
+
+[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="PlayerSpawners"]
+_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
+spawn_path = NodePath("../2")
+spawn_limit = 1
+
+[node name="MultiplayerSpawner3" type="MultiplayerSpawner" parent="PlayerSpawners"]
+_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
+spawn_path = NodePath("../3")
 spawn_limit = 1
 
 [node name="Buzzer2" parent="." instance=ExtResource("3_dfes2")]
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Host" type="Button" parent="CanvasLayer"]
+offset_left = 194.0
+offset_top = 273.0
+offset_right = 672.0
+offset_bottom = 644.0
+text = "Host"
+
+[node name="Join" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.02
+anchor_bottom = 0.029
+offset_left = 957.0
+offset_top = 295.0
+offset_right = 1568.6
+offset_bottom = 646.68
+text = "Join"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Join" to="." method="_on_join_pressed"]
