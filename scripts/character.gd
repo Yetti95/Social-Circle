@@ -21,11 +21,12 @@ var paused = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _enter_tree():
-	set_multiplayer_authority(name.to_int())
+#func _enter_tree():
+	#set_multiplayer_authority(name.to_int())
 
 func _ready():
-	$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = is_multiplayer_authority()
+	if player == multiplayer.get_unique_id():
+		$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = true
 		
 func _input(event):
 # Handle movement.

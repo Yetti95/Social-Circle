@@ -71,7 +71,7 @@ func _on_host_pressed():
 	$Menu/MarginContainer/VBoxContainer/Host.visible = false
 	$Menu/MarginContainer/VBoxContainer/Join.visible = false
 
-	change_level.rpc(load('res://scenes/Level.tscn'))
+	#change_level.rpc(load('res://scenes/Level.tscn'))
 
 	pass
 
@@ -80,7 +80,10 @@ func _on_join_pressed():
 	peer.create_client(Address, PORT.tcp)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	$Menu.visible = false	
+	$Menu/MarginContainer/VBoxContainer/Host.visible = false
+	$Menu/MarginContainer/VBoxContainer/Join.visible = false
+	$Menu/MarginContainer/VBoxContainer/Play.visible = false
+	#$Menu.visible = false	
 	
 	pass # Replace with function body.
 

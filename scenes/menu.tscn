@@ -7,6 +7,11 @@ script = ExtResource("1_o5moy")
 
 [node name="Level" type="Node" parent="."]
 
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/Level.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -61,11 +66,6 @@ offset_bottom = 307.0
 text = "SOCIAL CIRCLE"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/Level.tscn")
-spawn_path = NodePath("../Level")
-spawn_limit = 1
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
