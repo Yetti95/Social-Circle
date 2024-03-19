@@ -28,10 +28,14 @@ func _ready():
 	$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = is_multiplayer_authority()
 		
 func _input(event):
-# Input of player keys, WASD
-	var input := Vector3.ZERO
-	input.x = Input.get_axis("move_left", "move_right")
-	input.z = Input.get_axis("move_forward", "move_backward")
+# Handle movement.
+	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	#if not paused && event is InputEventMouseMotion:
 		#rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)

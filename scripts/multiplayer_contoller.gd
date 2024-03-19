@@ -71,7 +71,7 @@ func _on_host_pressed():
 	$Menu/MarginContainer/VBoxContainer/Host.visible = false
 	$Menu/MarginContainer/VBoxContainer/Join.visible = false
 
-	change_level.call_deferred(load('res://scenes/Level.tscn'))
+	change_level.rpc(load('res://scenes/Level.tscn'))
 
 	pass
 
@@ -92,6 +92,7 @@ func _on_options_pressed():
 func _on_quit_pressed():
 	pass # Replace with function body.
 
+@rpc("any_peer", "call_local", "reliable")
 func change_level(scene: PackedScene):
 	# Remove old level if any.
 	var level = $Level
@@ -99,4 +100,4 @@ func change_level(scene: PackedScene):
 		level.remove_child(c)
 		c.queue_free()
 	# Add new level.
-	level.add_child(scene.instantiate())
+	level.add_child(scene.instantiate(), true)
