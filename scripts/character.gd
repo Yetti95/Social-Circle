@@ -28,23 +28,14 @@ func _ready():
 	if player == multiplayer.get_unique_id():
 		$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = true
 		
-func _input(event):
-# Handle movement.
-	var direction = (transform.basis * Vector3(input.direction.x, 0, input.direction.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-	#if not paused && event is InputEventMouseMotion:
-		#rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
-#
-#func rotate_camera(move):
-	#CAMERA_MOUNT.rotate_y(-move.x)
-	#CAMERA_MOUNT.orthonormalize()
-	#CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
-#
-#func get_camera_rotation_basis() -> Basis:
-	#return CAMERA_ROT.global_transform.basis
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
+
+func rotate_camera(move):
+	CAMERA_MOUNT.rotate_y(-move.x)
+	CAMERA_MOUNT.orthonormalize()
+	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+
+func get_camera_rotation_basis() -> Basis:
+	return CAMERA_ROT.global_transform.basis

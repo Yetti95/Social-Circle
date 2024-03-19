@@ -20,9 +20,6 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wgiig"]
-properties/0/path = NodePath("PlayerInput:direction")
-properties/0/spawn = false
-properties/0/replication_mode = 1
 
 [node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_MOUNT", "CAMERA_ROT", "CAMERA3D")]
 script = ExtResource("1_4r616")
