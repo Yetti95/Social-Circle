@@ -31,14 +31,14 @@ func _exit_tree():
 func _process(delta):
 	pass
 
-@rpc('any_peer', "call_local", "reliable")
+#@rpc('any_peer', "call_local", "reliable")
 func add_player(id = 1):
 	var character = PlayerScene.instantiate()
 	# set Player id.
 	character.player = id
 	character.name = str(id)
 	#character.set_multiplayer_authority(id)
-	$Players.add_child(character)
+	$Players.add_child(character,true)
 	# sets player position to spawn locations
 	for spawn in get_tree().get_nodes_in_group('PlayerSpawnPoint'):
 			if not spawn.get_meta("spawned"):
