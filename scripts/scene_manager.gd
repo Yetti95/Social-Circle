@@ -43,6 +43,7 @@ func add_player(id = 1):
 	for spawn in get_tree().get_nodes_in_group('PlayerSpawnPoint'):
 			if not spawn.get_meta("spawned"):
 				character.position = spawn.position
+				character.rotation = spawn.rotation
 				spawn.set_meta("spawned", true)
 				break
 
