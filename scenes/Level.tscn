@@ -194,19 +194,19 @@ spawn_limit = 4
 [node name="PlayerSpawners" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0420594, 2.63252, 3.83535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.633, 3.835)
 metadata/spawned = false
 
 [node name="1" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0334983, 2.75851, -4.17266)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.759, -4.173)
 metadata/spawned = false
 
 [node name="2" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.47767, 2.84049, 0.0466535)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.478, 2.84, 0)
 metadata/spawned = false
 
 [node name="3" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.64265, 2.66501, -0.0694419)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.643, 2.665, 0)
 metadata/spawned = false
 
 [node name="Buzzer2" parent="." instance=ExtResource("3_dfes2")]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1fio2xah66dh"]
+
+[ext_resource type="PackedScene" uid="uid://b6oniet4ae0w" path="res://scenes/buzzer.tscn" id="1_xu1q3"]
+
+[node name="BuzzerTemplate" type="Node3D"]
+
+[node name="Buzzer" parent="." instance=ExtResource("1_xu1q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Buzzer2" parent="." instance=ExtResource("1_xu1q3")]
+
+[node name="Buzzer3" parent="." instance=ExtResource("1_xu1q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
