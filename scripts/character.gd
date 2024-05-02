@@ -27,15 +27,18 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	if player == multiplayer.get_unique_id():
 		$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
+	if Input.is_action_pressed('escape'):
+		get_tree().quit()
 
 func rotate_camera(move):
 	CAMERA_MOUNT.rotate_y(-move.x)
 	CAMERA_MOUNT.orthonormalize()
-	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * -move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
 
 func get_camera_rotation_basis() -> Basis:
 	return CAMERA_ROT.global_transform.basis

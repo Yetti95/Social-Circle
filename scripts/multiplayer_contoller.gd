@@ -93,7 +93,7 @@ func _on_options_pressed():
 
 
 func _on_quit_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
 func change_level(scene: PackedScene):
