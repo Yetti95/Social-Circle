@@ -4,6 +4,8 @@ extends Node3D
 @export var PORT := {'tcp': 3074, 'udp': [88, 3074]}
 var peer =  ENetMultiplayerPeer.new()
 @export var PlayerScene : PackedScene
+@export var BuzzerScene : PackedScene
+var max_buzzers = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,17 +36,45 @@ func _process(delta):
 #@rpc('any_peer', "call_local", "reliable")
 func add_player(id = 1):
 	var character = PlayerScene.instantiate()
+	
 	# set Player id.
 	character.player = id
 	character.name = str(id)
 	#character.set_multiplayer_authority(id)
 	$Players.add_child(character,true)
+	
+	var offset = -0.75
+	var spacing_multiplier = 0.75
+	var distance_from_player = 1.5
+	var y_offset = 1
 	# sets player position to spawn locations
 	for spawn in get_tree().get_nodes_in_group('PlayerSpawnPoint'):
 			if not spawn.get_meta("spawned"):
 				character.position = spawn.position
 				character.rotation = spawn.rotation
 				spawn.set_meta("spawned", true)
+				# Spawn in buzzer for each player
+				for i in range(max_buzzers):
+					var buzzer = preload("res://scenes/buzzer.tscn").instantiate()
+					buzzer.position = spawn.position
+					if spawn.position.x < 0:
+						buzzer.position.z += offset + (i * spacing_multiplier)
+						buzzer.position.x += distance_from_player
+						buzzer.position.y -= y_offset
+					elif spawn.position.z < 0:
+						buzzer.position.x += offset + (i * spacing_multiplier)
+						buzzer.position.z += distance_from_player
+						buzzer.position.y -= y_offset
+					elif spawn.position.x > 0:
+						buzzer.position.z += offset + (i * spacing_multiplier)
+						buzzer.position.x -= distance_from_player
+						buzzer.position.y -= y_offset
+					elif spawn.position.z > 0:
+						buzzer.position.x += offset + (i * spacing_multiplier)
+						buzzer.position.z -= distance_from_player
+						buzzer.position.y -= y_offset
+					buzzer.rotation = spawn.rotation
+					$Buzzers.add_child(buzzer)
 				break
 
 func del_player(id: int):

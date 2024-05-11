@@ -20,11 +20,10 @@ height = 0.2
 [node name="Buzzer" type="Node3D"]
 
 [node name="BuzzerBase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 mesh = SubResource("CylinderMesh_xli68")
 
 [node name="Button" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 material_override = SubResource("StandardMaterial3D_qlatf")
 mesh = SubResource("CylinderMesh_ly40c")
 skeleton = NodePath("../BuzzerBase")
