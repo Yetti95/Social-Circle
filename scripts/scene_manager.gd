@@ -4,7 +4,9 @@ extends Node3D
 @export var PORT := {'tcp': 3074, 'udp': [88, 3074]}
 var peer =  ENetMultiplayerPeer.new()
 @export var PlayerScene : PackedScene
-
+#This exports a drop down list of enums.
+# Used for switching between steam multiplayer and godot native multiplayer
+@export_enum("Native", "Steam") var OS_FLAG
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CanvasLayer.hide()
