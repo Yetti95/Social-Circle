@@ -50,6 +50,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = - event.relative.x * mouse_sensitivity
 			pitch_input = - event.relative.y * mouse_sensitivity
+	if event.is_action_pressed("look_left"):
+		$"Camera Mount/Camera Rot".rotate_x(deg_to_rad(-30))
+	if event.is_action_pressed("look_right"):
+		$"Camera Mount/Camera Rot".rotate_x(deg_to_rad(30))
 			
 func pause_pressed():
 	if paused:

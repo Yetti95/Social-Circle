@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6oniet4ae0w"]
+[gd_scene load_steps=6 format=3 uid="uid://b6oniet4ae0w"]
+
+[ext_resource type="Script" path="res://scripts/BuzzerSynchronizer.gd" id="1_vxk1u"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xli68"]
 top_radius = 0.25
 bottom_radius = 0.25
-height = 1.5
+height = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlatf"]
 albedo_color = Color(1, 0, 0, 1)
@@ -23,7 +25,10 @@ height = 0.2
 mesh = SubResource("CylinderMesh_xli68")
 
 [node name="Button" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 material_override = SubResource("StandardMaterial3D_qlatf")
 mesh = SubResource("CylinderMesh_ly40c")
 skeleton = NodePath("../BuzzerBase")
+
+[node name="BuzzerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+script = ExtResource("1_vxk1u")

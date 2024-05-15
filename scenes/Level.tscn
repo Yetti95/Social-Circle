@@ -129,22 +129,22 @@ spot_angle = 15.0
 spot_angle_attenuation = 0.0544093
 
 [node name="RedLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.5, 4.5, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.5, 0)
 light_color = Color(1, 0, 0, 1)
 spot_angle = 30.0
 
 [node name="GreenLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, 2.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, 3)
 light_color = Color(0, 1, 0, 1)
 spot_angle = 30.0
 
 [node name="BlueLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.5, 4.5, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, 4.5, 0)
 light_color = Color(0, 0, 1, 1)
 spot_angle = 30.0
 
 [node name="YellowLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, -2.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, -3)
 light_color = Color(1, 1, 0, 1)
 spot_angle = 30.0
 
@@ -197,23 +197,27 @@ spawn_limit = 4
 
 [node name="0" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 4)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="1" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.5, -4)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 2.5, -4)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="2" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 2.5, 0)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="3" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2.5, 0)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="Players" type="Node3D" parent="."]
 
-[node name="Buzzers" type="Node3D" parent="."]
+[node name="Buzzers" type="Node3D" parent="Players"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
