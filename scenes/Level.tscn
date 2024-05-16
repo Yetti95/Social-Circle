@@ -193,6 +193,11 @@ _spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
+[node name="BuzzerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
+spawn_path = NodePath("../Players/Buzzers")
+spawn_limit = 12
+
 [node name="PlayerSpawners" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]

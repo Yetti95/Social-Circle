@@ -47,6 +47,9 @@ func add_player(id = 1):
 	var spacing_multiplier = 1
 	var distance_from_player = 2
 	var y_offset = -0.25
+	var initial_x = 0
+	var initial_y = 2.5
+	var initial_z = 4
 	# sets player position to spawn locations
 	for spawn in get_tree().get_nodes_in_group('PlayerSpawnPoint'):
 			if not spawn.get_meta("spawned"):
@@ -56,45 +59,45 @@ func add_player(id = 1):
 				# Spawn in buzzer for each player
 				for i in range(max_buzzers):
 					var buzzer = preload("res://scenes/buzzer.tscn").instantiate()
-					buzzer.position = spawn.position
-					#var new_transform = Transform3D()
-					#if i%2 == 0:
-						#if i == 0:
-							#new_transform = new_transform.rotated(Vector3(0,0,1), -PI/2)
-							##
-						#if i == 2:
-							#new_transform = new_transform.rotated(Vector3(0,0,1), PI/2)
-					#var new_x = spawn.position.x + offset + (i * spacing_multiplier)
-					#var new_y = spawn.position.y + y_offset+ ((i+1)%2 *0.5)
-					#var new_z = spawn.position.z - distance_from_player + ((i+1)%2 * 0.75)
-					#var translation = Vector3(new_x, new_y, new_z)
-					#new_transform = new_transform.translated(translation)
-					#
-					#new_transform = new_transform.rotated(Vector3(0,1,0), deg_to_rad(spawn.rotation.y))
-					#buzzer.transform = new_transform
-					if spawn.position.x < 0:
-						buzzer.position.z += offset + (i * spacing_multiplier)
-						buzzer.position.x += distance_from_player - ((i+1)%2 * 0.75)
-						buzzer.position.y += y_offset + ((i+1)%2 *0.5)
-					elif spawn.position.z < 0:
-						buzzer.position.x += offset + (i * spacing_multiplier)
-						buzzer.position.z += distance_from_player - ((i+1)%2 * 0.75)
-						buzzer.position.y += y_offset + ((i+1)%2 *0.5)
-					elif spawn.position.x > 0:
-						buzzer.position.z += offset + (i * spacing_multiplier)
-						buzzer.position.x -= distance_from_player - ((i+1)%2 * 0.75)
-						buzzer.position.y += y_offset+ ((i+1)%2 *0.5)
-					elif spawn.position.z > 0:
-						buzzer.position.x += offset + (i * spacing_multiplier)
-						buzzer.position.z -= distance_from_player - ((i+1)%2 * 0.75)
-						buzzer.position.y += y_offset+ ((i+1)%2 *0.5)
+					#buzzer.position = spawn.position
+					var new_transform = Transform3D()
 					if i%2 == 0:
 						if i == 0:
-							buzzer.rotation.z += deg_to_rad(90)
-							
+							new_transform = new_transform.rotated(Vector3(0,0,1), -PI/2)
+							#
 						if i == 2:
-							buzzer.rotation.z -= deg_to_rad(90)
-					buzzer.rotate_y(PI)
+							new_transform = new_transform.rotated(Vector3(0,0,1), PI/2)
+					var new_x = initial_x + offset + (i * spacing_multiplier)
+					var new_y = initial_y + y_offset+ ((i+1)%2 *0.5)
+					var new_z = initial_z - distance_from_player + ((i+1)%2 * 0.75)
+					var translation = Vector3(new_x, new_y, new_z)
+					new_transform = new_transform.translated(translation)
+					new_transform = new_transform.rotated(Vector3(0,1,0), spawn.rotation.y)
+					buzzer.transform = new_transform
+					
+					#if spawn.position.x < 0:
+						#buzzer.position.z += offset + (i * spacing_multiplier)
+						#buzzer.position.x += distance_from_player - ((i+1)%2 * 0.75)
+						#buzzer.position.y += y_offset + ((i+1)%2 *0.5)
+					#elif spawn.position.z < 0:
+						#buzzer.position.x += offset + (i * spacing_multiplier)
+						#buzzer.position.z += distance_from_player - ((i+1)%2 * 0.75)
+						#buzzer.position.y += y_offset + ((i+1)%2 *0.5)
+					#elif spawn.position.x > 0:
+						#buzzer.position.z += offset + (i * spacing_multiplier)
+						#buzzer.position.x -= distance_from_player - ((i+1)%2 * 0.75)
+						#buzzer.position.y += y_offset+ ((i+1)%2 *0.5)
+					#elif spawn.position.z > 0:
+						#buzzer.position.x += offset + (i * spacing_multiplier)
+						#buzzer.position.z -= distance_from_player - ((i+1)%2 * 0.75)
+						#buzzer.position.y += y_offset+ ((i+1)%2 *0.5)
+					#if i%2 == 0:
+						#if i == 0:
+							#buzzer.rotation.z += deg_to_rad(90)
+							#
+						#if i == 2:
+							#buzzer.rotation.z -= deg_to_rad(90)
+					#buzzer.rotate_y(PI)
 					$Players/Buzzers.add_child(buzzer)
 				break
 

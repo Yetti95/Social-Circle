@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6oniet4ae0w"]
-
-[ext_resource type="Script" path="res://scripts/BuzzerSynchronizer.gd" id="1_vxk1u"]
+[gd_scene load_steps=5 format=3 uid="uid://b6oniet4ae0w"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xli68"]
 top_radius = 0.25
@@ -31,4 +29,3 @@ mesh = SubResource("CylinderMesh_ly40c")
 skeleton = NodePath("../BuzzerBase")
 
 [node name="BuzzerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-script = ExtResource("1_vxk1u")
