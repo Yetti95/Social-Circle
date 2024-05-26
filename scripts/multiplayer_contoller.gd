@@ -48,6 +48,8 @@ func SendPlayerInformation(customName, id):
 
 @rpc("any_peer", "call_local")
 func StartGame():
+	var timer = get_tree().create_timer(2.0)
+	await timer.timeout
 	change_level(load('res://scenes/Level.tscn'))
 	
 

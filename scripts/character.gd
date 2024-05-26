@@ -33,8 +33,8 @@ func _ready():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
+	#if event is InputEventMouseMotion:
+		#rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
 	# Look left when input received, restricted from going off the buttons
 	if event.is_action_pressed("look_left"):
 		if vote_direction > 0:

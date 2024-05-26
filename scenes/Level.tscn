@@ -194,8 +194,8 @@ spawn_path = NodePath("../Players")
 spawn_limit = 4
 
 [node name="BuzzerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
-spawn_path = NodePath("../Players/Buzzers")
+_spawnable_scenes = PackedStringArray("res://scenes/buzzer.tscn")
+spawn_path = NodePath("../Buzzers")
 spawn_limit = 12
 
 [node name="PlayerSpawners" type="Node3D" parent="."]
@@ -222,7 +222,7 @@ metadata/spawned = false
 
 [node name="Players" type="Node3D" parent="."]
 
-[node name="Buzzers" type="Node3D" parent="Players"]
+[node name="Buzzers" type="Node3D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -244,9 +244,6 @@ offset_bottom = 646.68
 text = "Join"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
-
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 
 [connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/Join" to="." method="_on_join_pressed"]
