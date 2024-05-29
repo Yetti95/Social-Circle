@@ -4,6 +4,8 @@ extends Node3D
 @export var PORT := {'tcp': 3074, 'udp': [88, 3074]}
 var peer =  ENetMultiplayerPeer.new()
 @export var PlayerScene : PackedScene
+@export var BuzzerScene : PackedScene
+var max_buzzers = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,17 +36,51 @@ func _process(delta):
 #@rpc('any_peer', "call_local", "reliable")
 func add_player(id = 1):
 	var character = PlayerScene.instantiate()
+	
 	# set Player id.
 	character.player = id
 	character.name = str(id)
 	#character.set_multiplayer_authority(id)
 	$Players.add_child(character,true)
+	
+	var offset = -1
+	var spacing_multiplier = 1
+	var distance_from_player = 2
+	var y_offset = -0.25
+	var initial_x = 0
+	var initial_y = 2.5
+	var initial_z = 4
 	# sets player position to spawn locations
 	for spawn in get_tree().get_nodes_in_group('PlayerSpawnPoint'):
 			if not spawn.get_meta("spawned"):
 				character.position = spawn.position
 				character.rotation = spawn.rotation
 				spawn.set_meta("spawned", true)
+				# Spawn in buzzer for each player
+				for i in range(max_buzzers):
+					var buzzer = preload("res://scenes/buzzer.tscn").instantiate()
+					#buzzer.position = spawn.position
+					
+					# Create transformation for each buzzer
+					var new_transform = Transform3D()
+					if i%2 == 0:
+						# Rotate left and right ones onto walls
+						if i == 0:
+							new_transform = new_transform.rotated(Vector3(0,0,1), -PI/2)
+							#
+						if i == 2:
+							new_transform = new_transform.rotated(Vector3(0,0,1), PI/2)
+					# Create new position based on one buzzer
+					var new_x = initial_x + offset + (i * spacing_multiplier)
+					var new_y = initial_y + y_offset+ ((i+1)%2 *0.5)
+					var new_z = initial_z - distance_from_player + ((i+1)%2 * 0.75)
+					var translation = Vector3(new_x, new_y, new_z)
+					new_transform = new_transform.translated(translation)
+					# Rotate around origin for any other spawns
+					new_transform = new_transform.rotated(Vector3(0,1,0), spawn.rotation.y)
+					buzzer.transform = new_transform
+					
+					$Buzzers.add_child(buzzer, true)
 				break
 
 func del_player(id: int):

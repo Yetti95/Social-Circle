@@ -21,21 +21,41 @@ var paused = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# Set vote to middle (states are 0,1,2 for left, middle, right)
+var vote_direction = 1
+
 #func _enter_tree():
 	#set_multiplayer_authority(name.to_int())
 
 func _ready():
 	if player == multiplayer.get_unique_id():
 		$"Camera Mount/Camera Rot/SpringArm3D/Camera3D".current = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
+	#if event is InputEventMouseMotion:
+		#rotate_camera(event.relative * CAMERA_MOUSE_ROTATION_SPEED)
+	# Look left when input received, restricted from going off the buttons
+	if event.is_action_pressed("look_left"):
+		if vote_direction > 0:
+			CAMERA_ROT.rotate_y(deg_to_rad(45))
+			vote_direction -= 1
+	# Look right when input received, restricted from going off the buttons
+	if event.is_action_pressed("look_right"):
+		if vote_direction < 2:
+			CAMERA_ROT.rotate_y(deg_to_rad(-45))
+			vote_direction += 1
+	# Handle player vote
+	if event.is_action_pressed("select"):
+		# Based on vote_direction, left, middle and right respectively
+		pass
+	if Input.is_action_pressed('escape'):
+		get_tree().quit()
 
 func rotate_camera(move):
 	CAMERA_MOUNT.rotate_y(-move.x)
 	CAMERA_MOUNT.orthonormalize()
-	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+	CAMERA_ROT.rotation.x = clamp(CAMERA_ROT.rotation.x + (CAMERA_UP_DOWN_MOVEMENT * -move.y), CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
 
 func get_camera_rotation_basis() -> Basis:
 	return CAMERA_ROT.global_transform.basis

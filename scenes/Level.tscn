@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0rfpsxqr46q"]
+[gd_scene load_steps=18 format=3 uid="uid://c0rfpsxqr46q"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_kg2ur"]
 [ext_resource type="PackedScene" uid="uid://bh7a2wvnpsyvb" path="res://scenes/character.tscn" id="2_bq1t0"]
-[ext_resource type="PackedScene" uid="uid://b6oniet4ae0w" path="res://scenes/buzzer.tscn" id="3_dfes2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lf5yf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -12,7 +11,7 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_lf5yf")
 
 [sub_resource type="Environment" id="Environment_yd5s0"]
-background_mode = 2
+background_mode = 3
 sky = SubResource("Sky_1hvlu")
 tonemap_mode = 2
 glow_enabled = true
@@ -57,7 +56,6 @@ data = PackedVector3Array(-0.5, 2.5, 1, 0.5, 2.5, 1, -0.5, -2.5, 1, 0.5, 2.5, 1,
 data = PackedVector3Array(-0.5, 2.5, 1, 0.5, 2.5, 1, -0.5, -2.5, 1, 0.5, 2.5, 1, 0.5, -2.5, 1, -0.5, -2.5, 1, 0.5, 2.5, -1, -0.5, 2.5, -1, 0.5, -2.5, -1, -0.5, 2.5, -1, -0.5, -2.5, -1, 0.5, -2.5, -1, 0.5, 2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, -1, 0.5, -2.5, 1, -0.5, 2.5, -1, -0.5, 2.5, 1, -0.5, -2.5, -1, -0.5, 2.5, 1, -0.5, -2.5, 1, -0.5, -2.5, -1, 0.5, 2.5, 1, -0.5, 2.5, 1, 0.5, 2.5, -1, -0.5, 2.5, 1, -0.5, 2.5, -1, 0.5, 2.5, -1, -0.5, -2.5, 1, 0.5, -2.5, 1, -0.5, -2.5, -1, 0.5, -2.5, 1, 0.5, -2.5, -1, -0.5, -2.5, -1)
 
 [node name="Level" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 script = ExtResource("1_kg2ur")
 PlayerScene = ExtResource("2_bq1t0")
 
@@ -65,7 +63,7 @@ PlayerScene = ExtResource("2_bq1t0")
 environment = SubResource("Environment_yd5s0")
 
 [node name="Floor" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(0.999929, 0, -0.0118854, 0, 1, 0, 0.0118854, 0, 0.999929, -1, 0, 2)
+transform = Transform3D(0.999929, 0, -0.0118854, 0, 1, 0, 0.0118854, 0, 0.999929, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4wi5o")
 skeleton = NodePath("../..")
 
@@ -75,7 +73,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_5ros6")
 
 [node name="BackLeftCorner" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, -10)
 mesh = SubResource("BoxMesh_mm2u2")
 skeleton = NodePath("../..")
 
@@ -85,7 +83,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_yeoi7")
 
 [node name="FrontLeftCorner" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, 10)
 mesh = SubResource("BoxMesh_mm2u2")
 skeleton = NodePath("../..")
 
@@ -95,7 +93,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_crrc1")
 
 [node name="BackRightCorner" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, -10)
 mesh = SubResource("BoxMesh_mm2u2")
 skeleton = NodePath("../..")
 
@@ -105,7 +103,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_5xtr2")
 
 [node name="BackLeftCorner2" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2.5, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, 10)
 mesh = SubResource("BoxMesh_mm2u2")
 skeleton = NodePath("../..")
 
@@ -115,7 +113,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_xr1nv")
 
 [node name="Ceiling" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(0.999929, 0, -0.0118854, 0, 1, 0, 0.0118854, 0, 0.999929, -0.994075, 5.01788, 2.00071)
+transform = Transform3D(0.999929, 0, -0.0118854, 0, 1, 0, 0.0118854, 0, 0.999929, 0, 5.018, 0)
 mesh = SubResource("CylinderMesh_4wi5o")
 skeleton = NodePath("../..")
 
@@ -125,29 +123,33 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_5ros6")
 
 [node name="Central Light" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 4.5, 2)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, 0)
 spot_attenuation = 0.0161761
-spot_angle = 30.0
+spot_angle = 15.0
 spot_angle_attenuation = 0.0544093
 
 [node name="RedLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.511, 2)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.5, 0)
 light_color = Color(1, 0, 0, 1)
+spot_angle = 30.0
 
 [node name="GreenLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 4.5, 7)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, 3)
 light_color = Color(0, 1, 0, 1)
+spot_angle = 30.0
 
 [node name="BlueLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6, 4.5, 2)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, 4.5, 0)
 light_color = Color(0, 0, 1, 1)
+spot_angle = 30.0
 
 [node name="YellowLight" type="SpotLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 4.5, -3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.5, -3)
 light_color = Color(1, 1, 0, 1)
+spot_angle = 30.0
 
 [node name="BackWall" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 0)
 mesh = SubResource("BoxMesh_br0r7")
 skeleton = NodePath("../..")
 
@@ -157,7 +159,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_rpior")
 
 [node name="BackWall2" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 0)
 mesh = SubResource("BoxMesh_br0r7")
 skeleton = NodePath("../..")
 
@@ -167,7 +169,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_2c013")
 
 [node name="BackWall3" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 2.5, 8)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7)
 mesh = SubResource("BoxMesh_br0r7")
 skeleton = NodePath("../..")
 
@@ -177,7 +179,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConcavePolygonShape3D_fs66x")
 
 [node name="BackWall4" type="MeshInstance3D" parent="WorldEnvironment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 2.5, -4)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, -7)
 mesh = SubResource("BoxMesh_br0r7")
 skeleton = NodePath("../..")
 
@@ -191,28 +193,36 @@ _spawnable_scenes = PackedStringArray("res://scenes/character.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
+[node name="BuzzerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/buzzer.tscn")
+spawn_path = NodePath("../Buzzers")
+spawn_limit = 12
+
 [node name="PlayerSpawners" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.633, 3.835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 4)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="1" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.759, -4.173)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 2.5, -4)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="2" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.478, 2.84, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 2.5, 0)
+rotation_order = 1
 metadata/spawned = false
 
 [node name="3" type="Node3D" parent="PlayerSpawners" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.643, 2.665, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2.5, 0)
+rotation_order = 1
 metadata/spawned = false
 
-[node name="Buzzer2" parent="." instance=ExtResource("3_dfes2")]
-
 [node name="Players" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00399303, -0.00402308, 0.000490427)
+
+[node name="Buzzers" type="Node3D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

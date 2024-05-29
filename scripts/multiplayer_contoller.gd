@@ -48,6 +48,8 @@ func SendPlayerInformation(customName, id):
 
 @rpc("any_peer", "call_local")
 func StartGame():
+	var timer = get_tree().create_timer(2.0)
+	await timer.timeout
 	change_level(load('res://scenes/Level.tscn'))
 	
 
@@ -93,7 +95,7 @@ func _on_options_pressed():
 
 
 func _on_quit_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
 
 @rpc("any_peer", "call_local", "reliable")
 func change_level(scene: PackedScene):
