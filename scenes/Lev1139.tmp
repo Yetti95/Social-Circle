@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0rfpsxqr46q"]
+[gd_scene load_steps=18 format=3 uid="uid://c0rfpsxqr46q"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_kg2ur"]
 [ext_resource type="PackedScene" uid="uid://bh7a2wvnpsyvb" path="res://scenes/character.tscn" id="2_bq1t0"]
-[ext_resource type="PackedScene" uid="uid://b6oniet4ae0w" path="res://scenes/buzzer.tscn" id="3_mvvfx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lf5yf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -59,7 +58,6 @@ data = PackedVector3Array(-0.5, 2.5, 1, 0.5, 2.5, 1, -0.5, -2.5, 1, 0.5, 2.5, 1,
 [node name="Level" type="Node3D"]
 script = ExtResource("1_kg2ur")
 PlayerScene = ExtResource("2_bq1t0")
-BuzzerScene = ExtResource("3_mvvfx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yd5s0")

@@ -5,7 +5,10 @@ extends Node3D
 var peer =  ENetMultiplayerPeer.new()
 @export var PlayerScene : PackedScene
 @export var BuzzerScene : PackedScene
+
 var max_buzzers = 3
+var votes = []
+var player_count = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +58,8 @@ func add_player(id = 1):
 			if not spawn.get_meta("spawned"):
 				character.position = spawn.position
 				character.rotation = spawn.rotation
+				character.spawncolor = spawn.name
+				character.connect("vote", Callable(self, "_on_character_vote"))
 				spawn.set_meta("spawned", true)
 				# Spawn in buzzer for each player
 				for i in range(max_buzzers):
@@ -79,7 +84,7 @@ func add_player(id = 1):
 					# Rotate around origin for any other spawns
 					new_transform = new_transform.rotated(Vector3(0,1,0), spawn.rotation.y)
 					buzzer.transform = new_transform
-					
+									
 					$Buzzers.add_child(buzzer, true)
 				break
 
@@ -118,3 +123,47 @@ func start_game():
 	#
 	#if multiplayer.is_server():
 		#change_level.call_deferred(load("res://level.tscn"))
+
+
+func _on_character_vote(votecolor):
+	print("Vote received: " + votecolor)
+	votes.append(votecolor)
+	if votes.size() >= player_count:
+		print("Processing results")
+		process_results()
+
+func tie():
+	print("Tie")
+	pass
+
+func voted_off(color):
+	print(color + " voted off")
+	pass
+
+func process_results():
+	var red_count = votes.count("Red")
+	var blue_count = votes.count("Blue")
+	var green_count = votes.count("Green")
+	var yellow_count = votes.count("Yellow")
+	
+	var highest_count = max(red_count, blue_count, green_count, yellow_count)
+	if highest_count == red_count:
+		if red_count == blue_count or red_count == green_count or red_count == yellow_count:
+			tie()
+		else:
+			voted_off("Red")
+	if highest_count == blue_count:
+		if blue_count == red_count or blue_count == green_count or blue_count == yellow_count:
+			tie()
+		else:
+			voted_off("Blue")
+	if highest_count == yellow_count:
+		if yellow_count == blue_count or yellow_count == green_count or yellow_count == red_count:
+			tie()
+		else:
+			voted_off("Yellow")
+	if highest_count == green_count:
+		if green_count == blue_count or green_count == red_count or green_count == yellow_count:
+			tie()
+		else:
+			voted_off("Green")
